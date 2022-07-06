@@ -11,7 +11,7 @@ server.use(cors());
 server.use(express.json());
 
 server.get('/teste', (req, res) => {
-    res.status(200).send('Blz meu parceiro, deu sucesso na requisição...');
+    res.status(200).send('Blz meu parceiro, deu sucesso na requisição.. ..');
 })
 
 
