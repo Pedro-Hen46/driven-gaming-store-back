@@ -13,4 +13,4 @@ mongoClient.connect().then(() => {
   db = mongoClient.db(DATABASE_NAME);
 });
 
-export { db, objectId };
+export { db };
