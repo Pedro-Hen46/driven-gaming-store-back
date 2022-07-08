@@ -2,7 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import chalk from "chalk";
-import userRouter from "./routes/userRouter.js";
+import userRouter from "./routes/userRoute.js";
+import productRouter from "./routes/productRoute.js"
 
 dotenv.config();
 
@@ -12,11 +13,7 @@ server.use(cors());
 server.use(express.json());
 
 server.use(userRouter);
-server.get('/teste', (req, res) => {
-    res.status(200).send('Blz meu parceiro, deu sucesso na requisição.. ..');
-})
-
-
+server.use(productRouter);
 
 server.listen(process.env.PORT, () => {
   console.info(chalk.bold.green("Servidor aberto na porta.: ", process.env.PORT));

@@ -1,7 +1,8 @@
 import joi from "joi";
 import bcrypt from 'bcrypt';
 import { v4 as uuid } from 'uuid';
-import db from "../dbStategy/mongo.js";
+import {db} from "../dbStategy/mongo.js";
+import jwt from 'jsonwebtoken';
 
 export async function createUser(req, res) {
 
@@ -22,9 +23,9 @@ export async function createUser(req, res) {
     }
 
     try {
-        const user = await db.collection("Users").find({ name }).toArray();
+        const user = await db.collection("Users").find({ email }).toArray();
 
-        if (user.some(e => e.name === req.body.name)) {
+        if (user.some(e => e.email === req.body.email)) {
             res.status(409).send("user ja existe!");
             return;
         }
@@ -59,8 +60,11 @@ export async function loginUser(req, res) {
     const user = await db.collection("Users").findOne({ email });
 
     if (user && bcrypt.compareSync(password, user.password)) {
-        const token = uuid();
-
+        const chaveSecreta = process.env.JWT_SECRET;
+        const configuracoes = { expiresIn: 60*60*24*30 } // 30 dias em segundos
+        
+        const token = jwt.sign({ id: user._id }, chaveSecreta, configuracoes);
+        
         await db.collection("sessions").insertOne({
             userId: user._id,
             token
