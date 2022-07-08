@@ -1,6 +1,5 @@
 import joi from "joi";
 import bcrypt from 'bcrypt';
-import { v4 as uuid } from 'uuid';
 import {db} from "../dbStategy/mongo.js";
 import jwt from 'jsonwebtoken';
 
