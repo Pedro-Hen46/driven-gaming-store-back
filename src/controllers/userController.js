@@ -60,11 +60,11 @@ export async function loginUser(req, res) {
     const user = await db.collection("Users").findOne({ email });
 
     if (user && bcrypt.compareSync(password, user.password)) {
-        const dados = user._id;
         const chaveSecreta = process.env.JWT_SECRET;
         const configuracoes = { expiresIn: 60*60*24*30 } // 30 dias em segundos
-        const token = jwt.sign(dados, chaveSecreta, configuracoes);
-
+        
+        const token = jwt.sign({ id: user._id }, chaveSecreta, configuracoes);
+        
         await db.collection("sessions").insertOne({
             userId: user._id,
             token
