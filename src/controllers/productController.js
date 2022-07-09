@@ -9,7 +9,7 @@ export async function getProduct(req, res) {
 export async function getProductDetails(req, res) {
     const { id } = req.body;
 
-    const productSelected = await db.collection("product").find().toArray();
+    const productSelected = await db.collection("product").find({ _id: id}).toArray();
 
     res.status(200).send(productSelected);
 }
