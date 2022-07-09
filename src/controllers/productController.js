@@ -7,9 +7,9 @@ export async function getProduct(req, res) {
 }
 
 export async function getProductDetails(req, res) {
-    const idProduct = req.body.product;
+    const { id } = req.body;
 
-    const productSelected = await db.collection("product").find({_id: new objectId(idProduct)}).toArray();
+    const productSelected = await db.collection("product").find().toArray();
 
     res.status(200).send('Deu bom meu querido toma o array',productSelected);
 }
