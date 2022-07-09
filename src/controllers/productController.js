@@ -1,5 +1,5 @@
 
-import { db , objectId } from "../dbStategy/mongo.js";
+import { db } from "../dbStategy/mongo.js";
 
 
 export async function getProduct(req, res) {
@@ -9,7 +9,7 @@ export async function getProduct(req, res) {
 
 export async function getProductDetails(req, res) {
     const { id } = req.body;
-    const productSelected = await db.collection("product").find({ _id: new objectId(id)}).toArray();
+    const productSelected = await db.collection("product").find({ id: id}).toArray();
 
     res.status(200).send(productSelected);
 }
