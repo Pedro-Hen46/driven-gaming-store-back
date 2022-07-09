@@ -71,7 +71,9 @@ export async function loginUser(req, res) {
 
         res.status(201).send({
             name: user.name,
-            token
+            email: user.email,
+            password: user.password, 
+            token 
         });
     } else {
         res.status(401).send("senha ou email incorretos");
