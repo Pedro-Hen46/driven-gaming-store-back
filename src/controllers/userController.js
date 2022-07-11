@@ -17,7 +17,7 @@ export async function createUser(req, res) {
     const validate = userSchema.validate(req.body);
     if (validate.error) {
         console.log(validate.error.details);
-        res.status(422).send("Favor preecher os campos corretamente");
+        res.status(422).send("Favor preencher os campos corretamente");
         return;
     }
 
@@ -72,7 +72,6 @@ export async function loginUser(req, res) {
         res.status(201).send({
             name: user.name,
             email: user.email,
-            password: user.password, 
             token 
         });
     } else {
