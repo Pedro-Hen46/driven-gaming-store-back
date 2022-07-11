@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import chalk from "chalk";
 import userRouter from "./routes/userRoute.js";
+import productRouter from "./routes/productRoute.js"
 import OrdersRoute from "./routes/userOrdersRoute.js";
 
 dotenv.config();
@@ -12,7 +13,8 @@ server.use(cors());
 server.use(express.json());
 
 server.use(userRouter);
-server.use(OrdersRoute)
+server.use(OrdersRoute);
+server.use(productRouter);
 
 
 server.listen(process.env.PORT, () => {
